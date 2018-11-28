@@ -60,6 +60,20 @@ namespace CommonDinnerScheduler
             return wasAlreadyOnList;
         }
 
+        public bool signPersonOffDay(string name, DinnerDay day)
+        {
+            bool wasOnList;
+
+            if(day.Participants.Contains(name))
+            {
+                day.Participants.Remove(name);
+                day.daysResponsibleFor.Remove(name);
+                return true;
+            }
+
+            return false;
+        }
+
         public void update_nTimesChefPrSignedUpDate()
         {
             //Make temporary list of new data

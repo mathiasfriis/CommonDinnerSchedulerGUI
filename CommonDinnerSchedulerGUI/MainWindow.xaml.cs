@@ -31,7 +31,7 @@ namespace CommonDinnerSchedulerGUI
 
             LV_participants.ItemsSource = schedule.participants;
 
-            miCurrentWeekdays.ItemsSource = schedule.dinnerDays;
+            miSignUpFor.ItemsSource = schedule.dinnerDays;
         }
 
         private void btnAddWeekday_Click(object sender, RoutedEventArgs e)
@@ -45,6 +45,9 @@ namespace CommonDinnerSchedulerGUI
                     MessageBox.Show("Day was already added to schedule.");
                 }
             }
+
+            //Select the newly added
+            LV_weekdays.SelectedIndex = schedule.dinnerDays.Count-1;
         }
 
         private void btnAddParticipant_Click(object sender, RoutedEventArgs e)
@@ -70,7 +73,7 @@ namespace CommonDinnerSchedulerGUI
             tbWeekday.Text = day.dayOfWeekString;
             tbStartDate.Text = day.startDate.ToShortDateString();
             tbEndDate.Text = day.endDate.ToShortDateString();
-
+            tbParticipants.Text = day.Participants.Count.ToString();
             LV_specificWeekdayParticipants.ItemsSource = day.Participants;
 
         }
@@ -94,16 +97,29 @@ namespace CommonDinnerSchedulerGUI
                 {
                     MessageBox.Show("Person was already signed up for this day.");
                 }
+
+                tbParticipants.Text = dd.Participants.Count.ToString();
             }
             catch
             {
                 MessageBox.Show("Please add participants to list before signing anyone up.");
             }
+
+            
         }
 
         private void cmSignOffSpecificWeekday_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(sender.ToString());
+            DinnerDay dd = (DinnerDay)LV_weekdays.SelectedItem;
+            string nameString = (string)LV_specificWeekdayParticipants.SelectedItem;
+            schedule.signPersonOffDay(nameString, dd);
+
+        }
+
+       
+        //hack to make sure that items in listviews are being selected on right click
+        private void LV_participants_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
         }
     }
 }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
         mc:Ignorable="d"
         Title="Common Dinner Scheduler" Height="450" Width="800">
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130" />
@@ -23,7 +24,8 @@
         <Button x:Name="btn_addWeekday" Content="Add weekday..." HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Click="btnAddWeekday_Click"/>
 
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Weekdays" VerticalAlignment="Top"/>
-        <ListView x:Name="LV_participants" HorizontalAlignment="Left" Height="175" Margin="10,31,0,0" VerticalAlignment="Top" Width="110" IsSynchronizedWithCurrentItem="True" Grid.Column="1">
+        <ListView x:Name="LV_participants" HorizontalAlignment="Left" Height="175" Margin="10,31,0,0" VerticalAlignment="Top" Width="110" IsSynchronizedWithCurrentItem="True" Grid.Column="1" PreviewMouseRightButtonDown="LV_participants_PreviewMouseRightButtonDown">
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name/Room No."/>
@@ -31,14 +33,13 @@
             </ListView.View>
             <ListView.ContextMenu>
                 <ContextMenu Name="cmSignUpWeekdays">
-                    <MenuItem Name ="miCurrentWeekdays" Header="Sign up for...">
+                    <MenuItem Name ="miSignUpFor" Header="Sign up for...">
                         <MenuItem.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=dayOfWeekString}" HorizontalAlignment="Left" MouseUp="TextBlock_MouseUp"/>
                             </DataTemplate>
                         </MenuItem.ItemTemplate>
                     </MenuItem>
-                    <MenuItem Header="Sign off for..."/>
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
@@ -51,12 +52,14 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Specific Weekday Details:" VerticalAlignment="Top" Grid.Column="2"/>
         <Grid Name="gridWeekdayDetails" Grid.Column="2" HorizontalAlignment="Left" Height="170" Margin="9.8,31,0,0" VerticalAlignment="Top" Width="200">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="70"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -64,12 +67,14 @@
             <TextBlock Text="Weekday:"/>
             <TextBlock Text="Start date:" Grid.Row="1"/>
             <TextBlock Text="End date:" Grid.Row="2"/>
+            <TextBlock Text="Participants:" Grid.Row="3"/>
 
             <TextBlock Name="tbWeekday" Grid.Column="1" Text="Weekday:"/>
             <TextBlock Name="tbStartDate" Grid.Column="1" Text="Start date:" Grid.Row="1"/>
             <TextBlock Name="tbEndDate" Grid.Column="1" Text="End date:" Grid.Row="2"/>
+            <TextBlock Name="tbParticipants" Grid.Column="1" Text="End date:" Grid.Row="3"/>
 
-            <ListView x:Name="LV_specificWeekdayParticipants" HorizontalAlignment="Left" Height="auto"  VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+            <ListView x:Name="LV_specificWeekdayParticipants" HorizontalAlignment="Left" Height="auto"  VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Participants"/>
@@ -78,7 +83,6 @@
                 <ListView.ContextMenu>
                     <ContextMenu>
                         <MenuItem Name ="cmSignOffSpecificWeekday" Header="Sign off" Click="cmSignOffSpecificWeekday_Click"/>
-                            <MenuItem Header="Sign off for..."/>
                     </ContextMenu>
                 </ListView.ContextMenu>
             </ListView>
