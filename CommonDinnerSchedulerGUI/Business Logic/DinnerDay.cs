@@ -20,8 +20,8 @@ namespace CommonDinnerScheduler
         public DayOfWeek dayOfWeek { get; set; }
 
         public string dayOfWeekString { get { return dayOfWeek.ToString(); } }
-        private DateTime startDate { get; set; }
-        private DateTime endDate { get; set; }
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
 
         public List<CommonDinnerDate> specificDates;
         public Dictionary<String, int> daysResponsibleFor;

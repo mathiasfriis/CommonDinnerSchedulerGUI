@@ -61,5 +61,14 @@ namespace CommonDinnerSchedulerGUI
                 }
             }
         }
+
+        private void LV_weekdays_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DinnerDay day = (DinnerDay)LV_weekdays.SelectedItem;
+            tbWeekday.Text = day.dayOfWeekString;
+            tbStartDate.Text = day.startDate.ToShortDateString();
+            tbEndDate.Text = day.endDate.ToShortDateString();
+
+        }
     }
 }

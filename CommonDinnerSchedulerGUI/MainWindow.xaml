@@ -9,10 +9,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="130" />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Weekdays" VerticalAlignment="Top"/>
-        <ListView x:Name="LV_weekdays" HorizontalAlignment="Left" Height="175" Margin="10,31,0,0" VerticalAlignment="Top" Width="100" IsSynchronizedWithCurrentItem="True">
+        <ListView x:Name="LV_weekdays" HorizontalAlignment="Left" Height="175" Margin="10,31,0,0" VerticalAlignment="Top" Width="100" IsSynchronizedWithCurrentItem="True" SelectionChanged="LV_weekdays_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Day of the week" DisplayMemberBinding="{Binding dayOfWeekString}"/>
@@ -29,8 +30,34 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Participants" VerticalAlignment="Top" Grid.Column="1"/>
-        <Button Name ="btnAddParticipant" Content="Add participant..." Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Click="btnAddParticipant_Click"/>
-        
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Residents" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button Name ="btnAddParticipant" Content="Add resident..." Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Click="btnAddParticipant_Click"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"><Run Text="Residents"/></TextBlock>
+        <Rectangle Grid.Column="2" Width="1" HorizontalAlignment="Left" Visibility="Visible" Fill="Black"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Specific Weekday Details:" VerticalAlignment="Top" Grid.Column="2"/>
+        <Grid Name="gridWeekdayDetails" Grid.Column="2" HorizontalAlignment="Left" Height="170" Margin="9.8,31,0,0" VerticalAlignment="Top" Width="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Weekday:"/>
+            <TextBlock Text="Start date:" Grid.Row="1"/>
+            <TextBlock Text="End date:" Grid.Row="2"/>
+
+            <TextBlock Name="tbWeekday" Grid.Column="1" Text="Weekday:"/>
+            <TextBlock Name="tbStartDate" Grid.Column="1" Text="Start date:" Grid.Row="1"/>
+            <TextBlock Name="tbEndDate" Grid.Column="1" Text="End date:" Grid.Row="2"/>
+        </Grid>
+
+
     </Grid>
 </Window>
