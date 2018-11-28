@@ -23,16 +23,18 @@ namespace CommonDinnerScheduler
             nDaysChefPrSignedUpDate = new Dictionary<string, float>();
         }
 
-        public void signPersonUpForDay(String name, DinnerDay day)
+        public bool signPersonUpForDay(String name, DinnerDay day)
         {
+            bool wasAlreadyOnList;
             if(!participants.Contains(name))
             {
-                participants.Add(name);
+                participants.Add(name);   
             }
 
             //Sign up person for day
             if(day.AddParticipant(name))
             {
+                wasAlreadyOnList = false;
                 //Add to dictionary if not there already
                 if (nDaysChefPrSignedUpDate.ContainsKey(name) == false)
                 {
@@ -50,6 +52,12 @@ namespace CommonDinnerScheduler
                     nDaysSignedUpFor[name]++;
                 }
             }
+            else
+            {
+                wasAlreadyOnList = true;
+            }
+
+            return wasAlreadyOnList;
         }
 
         public void update_nTimesChefPrSignedUpDate()

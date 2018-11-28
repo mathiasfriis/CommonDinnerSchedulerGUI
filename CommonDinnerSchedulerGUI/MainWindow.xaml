@@ -29,6 +29,18 @@
                     <GridViewColumn Header="Name/Room No."/>
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu Name="cmSignUpWeekdays">
+                    <MenuItem Name ="miCurrentWeekdays" Header="Sign up for...">
+                        <MenuItem.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=dayOfWeekString}" HorizontalAlignment="Left" MouseUp="TextBlock_MouseUp"/>
+                            </DataTemplate>
+                        </MenuItem.ItemTemplate>
+                    </MenuItem>
+                    <MenuItem Header="Sign off for..."/>
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Residents" VerticalAlignment="Top" Grid.Column="1"/>
         <Button Name ="btnAddParticipant" Content="Add resident..." Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Click="btnAddParticipant_Click"/>
@@ -56,6 +68,20 @@
             <TextBlock Name="tbWeekday" Grid.Column="1" Text="Weekday:"/>
             <TextBlock Name="tbStartDate" Grid.Column="1" Text="Start date:" Grid.Row="1"/>
             <TextBlock Name="tbEndDate" Grid.Column="1" Text="End date:" Grid.Row="2"/>
+
+            <ListView x:Name="LV_specificWeekdayParticipants" HorizontalAlignment="Left" Height="auto"  VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Participants"/>
+                    </GridView>
+                </ListView.View>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Name ="cmSignOffSpecificWeekday" Header="Sign off" Click="cmSignOffSpecificWeekday_Click"/>
+                            <MenuItem Header="Sign off for..."/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
         </Grid>
 
 

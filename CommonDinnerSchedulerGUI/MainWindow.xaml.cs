@@ -30,15 +30,17 @@ namespace CommonDinnerSchedulerGUI
             LV_weekdays.ItemsSource = schedule.dinnerDays;
 
             LV_participants.ItemsSource = schedule.participants;
+
+            miCurrentWeekdays.ItemsSource = schedule.dinnerDays;
         }
 
         private void btnAddWeekday_Click(object sender, RoutedEventArgs e)
         {
             AddWeekdayDialogBox addWeekdayDialog = new AddWeekdayDialogBox();
-            if(addWeekdayDialog.ShowDialog()==true)
+            if (addWeekdayDialog.ShowDialog() == true)
             {
                 //MessageBox.Show(addWeekdayDialog.dayOfWeek.ToString() + " - StartDate:" + addWeekdayDialog.startDate.ToShortDateString() + " - EndDate: " + addWeekdayDialog.endDate.ToShortDateString());
-                if(schedule.addDayToSchedule(addWeekdayDialog.dayOfWeek, addWeekdayDialog.startDate, addWeekdayDialog.endDate)==false)
+                if (schedule.addDayToSchedule(addWeekdayDialog.dayOfWeek, addWeekdayDialog.startDate, addWeekdayDialog.endDate) == false)
                 {
                     MessageBox.Show("Day was already added to schedule.");
                 }
@@ -48,10 +50,10 @@ namespace CommonDinnerSchedulerGUI
         private void btnAddParticipant_Click(object sender, RoutedEventArgs e)
         {
             AddParticipantDialogBox addParticipantDialogBox = new AddParticipantDialogBox();
-            if(addParticipantDialogBox.ShowDialog()==true)
+            if (addParticipantDialogBox.ShowDialog() == true)
             {
                 string name = addParticipantDialogBox.nameResult;
-                if(schedule.participants.Contains(name))
+                if (schedule.participants.Contains(name))
                 {
                     MessageBox.Show("Participant " + name + " was already on list.");
                 }
@@ -69,6 +71,39 @@ namespace CommonDinnerSchedulerGUI
             tbStartDate.Text = day.startDate.ToShortDateString();
             tbEndDate.Text = day.endDate.ToShortDateString();
 
+            LV_specificWeekdayParticipants.ItemsSource = day.Participants;
+
+        }
+
+        private void LV_participants_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            string participantName = (sender as ListView).SelectedItem.ToString();
+            MessageBox.Show(participantName);
+        }
+
+        private void TextBlock_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                string dayString = (sender as TextBlock).Text;
+                string nameString = LV_participants.SelectedItem.ToString();
+
+                DinnerDay dd = schedule.dinnerDays.First(x => x.dayOfWeekString.Equals(dayString));
+                
+                if(schedule.signPersonUpForDay(nameString,dd)==true) //Return value indicates whether the person was on the list already
+                {
+                    MessageBox.Show("Person was already signed up for this day.");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please add participants to list before signing anyone up.");
+            }
+        }
+
+        private void cmSignOffSpecificWeekday_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
         }
     }
 }
