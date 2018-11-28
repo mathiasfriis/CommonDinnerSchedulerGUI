@@ -1,0 +1,36 @@
+﻿<Window x:Class="CommonDinnerSchedulerGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
+        mc:Ignorable="d"
+        Title="Common Dinner Scheduler" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Weekdays" VerticalAlignment="Top"/>
+        <ListView x:Name="LV_weekdays" HorizontalAlignment="Left" Height="175" Margin="10,31,0,0" VerticalAlignment="Top" Width="100" IsSynchronizedWithCurrentItem="True">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Day of the week" DisplayMemberBinding="{Binding dayOfWeekString}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btn_addWeekday" Content="Add weekday..." HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Click="btnAddWeekday_Click"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Weekdays" VerticalAlignment="Top"/>
+        <ListView x:Name="LV_participants" HorizontalAlignment="Left" Height="175" Margin="10,31,0,0" VerticalAlignment="Top" Width="110" IsSynchronizedWithCurrentItem="True" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name/Room No."/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Participants" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button Name ="btnAddParticipant" Content="Add participant..." Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Click="btnAddParticipant_Click"/>
+        
+    </Grid>
+</Window>
