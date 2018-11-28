@@ -121,5 +121,35 @@ namespace CommonDinnerSchedulerGUI
         private void LV_participants_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            schedule.AssignDates();
+
+            btn_showDates.Visibility = Visibility.Visible;
+
+            ShowDates();
+
+            int totalDates = 0;
+            foreach(DinnerDay d in schedule.dinnerDays)
+            {
+                totalDates += d.specificDates.Count;
+            }
+
+            MessageBox.Show("Assigned " + totalDates + " dates");
+        }
+
+        private void ShowDatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowDates();
+        }
+
+        private void ShowDates()
+        {
+            foreach(var d in schedule.dinnerDays)
+            {
+                //Show dates in table in new window
+            }
+        }
     }
 }

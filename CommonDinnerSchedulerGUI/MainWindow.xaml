@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
         mc:Ignorable="d"
-        Title="Common Dinner Scheduler" Height="450" Width="800">
+        Title="Common Dinner Scheduler" Height="300" Width="620" ResizeMode="NoResize">
     
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130" />
             <ColumnDefinition Width="130" />
+            <ColumnDefinition Width="230" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Weekdays" VerticalAlignment="Top"/>
@@ -87,6 +88,15 @@
                 </ListView.ContextMenu>
             </ListView>
         </Grid>
+
+        <Rectangle Grid.Column="3" Width="1" HorizontalAlignment="Left" Visibility="Visible" Fill="Black"/>
+
+        <Button Grid.Column="3" Width="100" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10" Click="Button_Click">
+            <TextBlock Text="Assign dates"/>
+        </Button>
+        <Button Name="btn_showDates" Grid.Column="3" Width="100" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed" Margin="10.4,150,0,100.4" Click="ShowDatesButton_Click">
+            <TextBlock Text="Show dates"/>
+        </Button>
 
 
     </Grid>
