@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
         mc:Ignorable="d"
-        Title="ScheduleWindow" Height="auto" MinHeight="450" Width="800"
+        Title="ScheduleWindow" Height="auto" MinHeight="450" Width="auto"
         WindowStartupLocation="CenterOwner">
-    <Grid>
-        <TextBlock Name="tbWeekday" Text="Monday" Margin="10" FontSize="24" FontWeight="Bold"/>
+    <Grid Width="auto">
+        <TextBlock Name="tbWeekday" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Text="Monday" Margin="10,10,0,0" FontSize="24" Width="256" FontWeight="Bold"/>
         <DataGrid Name="dgDates" HorizontalAlignment="Left" Height="auto" MinHeight="100" Margin="10,57,0,0" VerticalAlignment="Top" Width="auto" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Date" Width="100" IsReadOnly="True">
@@ -29,7 +29,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Time" Width="50" IsReadOnly="True">
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Money put out" Width="100" IsReadOnly="True">
+                <DataGridTemplateColumn Header="Money put down" Width="auto" IsReadOnly="True">
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
