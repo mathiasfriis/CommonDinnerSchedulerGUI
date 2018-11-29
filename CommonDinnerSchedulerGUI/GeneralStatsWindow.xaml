@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
         mc:Ignorable="d"
-        Title="GeneralStatsWindow" Height="450" Width="800">
+        Title="GeneralStatsWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <DataGrid Name="dgPeople" HorizontalAlignment="Left" MinHeight="100" Margin="10,10,0,0" VerticalAlignment="Top" MinWidth="300" AutoGenerateColumns="False">
             <DataGrid.Columns>

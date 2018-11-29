@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
         mc:Ignorable="d"
-        Title="ScheduleWindow" Height="auto" MinHeight="450" Width="800">
+        Title="ScheduleWindow" Height="auto" MinHeight="450" Width="800"
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <TextBlock Name="tbWeekday" Text="Monday" Margin="10" FontSize="24" FontWeight="Bold"/>
         <DataGrid Name="dgDates" HorizontalAlignment="Left" Height="auto" MinHeight="100" Margin="10,57,0,0" VerticalAlignment="Top" Width="auto" AutoGenerateColumns="False">

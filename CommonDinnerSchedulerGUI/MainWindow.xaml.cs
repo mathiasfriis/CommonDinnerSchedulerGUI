@@ -38,6 +38,7 @@ namespace CommonDinnerSchedulerGUI
         private void btnAddWeekday_Click(object sender, RoutedEventArgs e)
         {
             AddWeekdayDialogBox addWeekdayDialog = new AddWeekdayDialogBox();
+            addWeekdayDialog.Owner = this;
             if (addWeekdayDialog.ShowDialog() == true)
             {
                 //MessageBox.Show(addWeekdayDialog.dayOfWeek.ToString() + " - StartDate:" + addWeekdayDialog.startDate.ToShortDateString() + " - EndDate: " + addWeekdayDialog.endDate.ToShortDateString());
@@ -54,6 +55,7 @@ namespace CommonDinnerSchedulerGUI
         private void btnAddParticipant_Click(object sender, RoutedEventArgs e)
         {
             AddParticipantDialogBox addParticipantDialogBox = new AddParticipantDialogBox();
+            addParticipantDialogBox.Owner = this;
             if (addParticipantDialogBox.ShowDialog() == true)
             {
                 string name = addParticipantDialogBox.nameResult;
@@ -99,7 +101,7 @@ namespace CommonDinnerSchedulerGUI
                     MessageBox.Show("Person was already signed up for this day.");
                 }
 
-                tbParticipants.Text = dd.Participants.Count.ToString();
+                //tbParticipants.Text = dd.Participants.Count.ToString();
             }
             catch
             {
@@ -126,6 +128,17 @@ namespace CommonDinnerSchedulerGUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             schedule.AssignDates();
+            int cnt = 0;
+            float maxDiff = 0.5f;
+            while(schedule.getMaxRatioDifference()> maxDiff)
+            {
+                schedule.AssignDates();
+                if(cnt++==100)
+                {
+                    cnt = 0;
+                    maxDiff += 0.1f;
+                }
+            }
 
             btn_showDates.Visibility = Visibility.Visible;
 
@@ -137,7 +150,7 @@ namespace CommonDinnerSchedulerGUI
                 totalDates += d.specificDates.Count;
             }
 
-            MessageBox.Show("Assigned " + totalDates + " dates");
+            //MessageBox.Show("Assigned " + totalDates + " dates");
         }
 
         private void ShowDatesButton_Click(object sender, RoutedEventArgs e)
@@ -159,10 +172,12 @@ namespace CommonDinnerSchedulerGUI
             foreach(var d in schedule.dinnerDays)
             {
                 ScheduleWindow scheduleWindow = new ScheduleWindow(d);
+                scheduleWindow.Owner = this;
                 scheduleWindow.Show();
             }
 
             GeneralStatsWindow generalStatsWindow = new GeneralStatsWindow(people);
+            generalStatsWindow.Owner = this;
             generalStatsWindow.Show();
         }
     }

@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
         mc:Ignorable="d"
-        Title="AddParticipantDialogBox" Height="100" Width="300">
+        Title="AddParticipantDialogBox" Height="100" Width="300"
+        WindowStartupLocation="CenterOwner">
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -24,7 +27,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Name = "btnOK" Content="OK" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Click="btnOK_Click"/>
+            <Button Name = "btnOK" IsDefault="True" Content="OK" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" Click="btnOK_Click"/>
             <Button Content="Cancel" VerticalAlignment="Center" Width="60" Grid.Column="1" HorizontalAlignment="Center" IsCancel="True"/>
         </Grid>
     </Grid>

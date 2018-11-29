@@ -8,7 +8,7 @@ namespace CommonDinnerSchedulerGUI.Business_Logic
 {
     public class ddPerson
     {
-        public string Name;
+        public string Name { get; }
         public int weekdaysParticipatingIn;
         public int nTimesCook;
         public float cookWeekdaysRatio;
@@ -22,7 +22,7 @@ namespace CommonDinnerSchedulerGUI.Business_Logic
             Name = name;
             weekdaysParticipatingIn = wdp;
             nTimesCook = ntc;
-            cookWeekdaysRatio = nTimesCook / weekdaysParticipatingIn;
+            cookWeekdaysRatio = (float)nTimesCook / (float)weekdaysParticipatingIn;
         }
     }
 }

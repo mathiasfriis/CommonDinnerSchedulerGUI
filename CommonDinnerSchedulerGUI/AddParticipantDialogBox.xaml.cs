@@ -23,6 +23,7 @@ namespace CommonDinnerSchedulerGUI
         public AddParticipantDialogBox()
         {
             InitializeComponent();
+            tbName.Focus();
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)

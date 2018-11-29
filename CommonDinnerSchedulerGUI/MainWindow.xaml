@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
         mc:Ignorable="d"
-        Title="Common Dinner Scheduler" Height="300" Width="650" ResizeMode="NoResize">
-    
+        Title="Common Dinner Scheduler" Height="300" Width="650" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <RoutedUICommand x:Key="addResidentCommand" Text="Text" />
+        <RoutedUICommand x:Key="addWeekdayCommand" Text="Another Text" />
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource addResidentCommand}" 
+                    Executed="btnAddParticipant_Click"/>
+        <CommandBinding Command="{StaticResource addWeekdayCommand}" 
+                    Executed="btnAddWeekday_Click"/>
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Key="R" Command="{StaticResource addResidentCommand}" />
+        <KeyBinding Key="W" Command="{StaticResource addWeekdayCommand}" />
+    </Window.InputBindings>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="130" />
@@ -22,7 +40,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btn_addWeekday" Content="Add weekday..." HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Click="btnAddWeekday_Click"/>
+        <Button x:Name="btn_addWeekday"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Command="{StaticResource addWeekdayCommand}">
+            <Button.Content>
+                <TextBlock>
+                    Add <Underline>w</Underline>eekday...
+                </TextBlock>
+            </Button.Content>
+        </Button>
 
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Weekdays" VerticalAlignment="Top"/>
         <ListView x:Name="LV_participants" HorizontalAlignment="Left" Height="175" Margin="10,31,0,0" VerticalAlignment="Top" Width="110" IsSynchronizedWithCurrentItem="True" Grid.Column="1" PreviewMouseRightButtonDown="LV_participants_PreviewMouseRightButtonDown">
@@ -45,7 +69,13 @@
             </ListView.ContextMenu>
         </ListView>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Residents" VerticalAlignment="Top" Grid.Column="1"/>
-        <Button Name ="btnAddParticipant" Content="Add resident..." Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0" Click="btnAddParticipant_Click"/>
+        <Button Name ="btnAddParticipant" Command="{StaticResource addResidentCommand}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.837,8.125" Margin="10,211,0,0">
+            <Button.Content>
+                <TextBlock>
+                    Add <Underline>r</Underline>esident...
+                </TextBlock>
+            </Button.Content>
+        </Button>
 
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1"><Run Text="Residents"/></TextBlock>
         <Rectangle Grid.Column="2" Width="1" HorizontalAlignment="Left" Visibility="Visible" Fill="Black"/>
