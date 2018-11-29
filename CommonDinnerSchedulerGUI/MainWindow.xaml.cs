@@ -1,4 +1,5 @@
 ﻿using CommonDinnerScheduler;
+using CommonDinnerSchedulerGUI.Business_Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -146,10 +147,23 @@ namespace CommonDinnerSchedulerGUI
 
         private void ShowDates()
         {
+            List<ddPerson> people = new List<ddPerson>();
+            foreach (var p in schedule.participants)
+            {
+                string name = p;
+                int nTimesCooked = schedule.getNumberOfTimesPersonIsChef(p);
+                int weekdaysSignedUpFor = schedule.nDaysSignedUpFor[p];
+                people.Add(new ddPerson(name, weekdaysSignedUpFor, nTimesCooked));
+            }
+
             foreach(var d in schedule.dinnerDays)
             {
-                //Show dates in table in new window
+                ScheduleWindow scheduleWindow = new ScheduleWindow(d);
+                scheduleWindow.Show();
             }
+
+            GeneralStatsWindow generalStatsWindow = new GeneralStatsWindow(people);
+            generalStatsWindow.Show();
         }
     }
 }

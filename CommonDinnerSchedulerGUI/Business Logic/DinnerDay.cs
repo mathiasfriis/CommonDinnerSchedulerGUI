@@ -23,6 +23,9 @@ namespace CommonDinnerScheduler
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
 
+        public string startDateString { get { return startDate.ToShortDateString(); } }
+        public string endDateString { get { return endDate.ToShortDateString(); } }
+
         public List<CommonDinnerDate> specificDates;
         public Dictionary<String, int> daysResponsibleFor;
         public DinnerDay(DayOfWeek weekDay, DateTime StartDate, DateTime EndDate)

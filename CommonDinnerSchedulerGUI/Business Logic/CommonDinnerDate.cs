@@ -11,6 +11,8 @@ namespace CommonDinnerScheduler
         public String responsiblePerson { get; set; }
         public DateTime date { get; set; }
 
+        public string dateString { get { return date.ToShortDateString(); } }
+
         public CommonDinnerDate(DateTime Date)
         {
             responsiblePerson = "None";
