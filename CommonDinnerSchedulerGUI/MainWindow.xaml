@@ -58,10 +58,10 @@
             </ListView.View>
             <ListView.ContextMenu>
                 <ContextMenu Name="cmSignUpWeekdays">
-                    <MenuItem Name ="miSignUpFor" Header="Sign up for...">
+                    <MenuItem Name ="miSignUpFor" Header="Sign up for..." Click="miSignUpFor_Click">
                         <MenuItem.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=dayOfWeekString}" HorizontalAlignment="Left" MouseUp="TextBlock_MouseUp"/>
+                                <TextBlock Name="menuItem_tb_dayOfWeek" Text="{Binding Path=dayOfWeekString}" HorizontalAlignment="Stretch" MouseUp="TextBlock_MouseUp"/>
                             </DataTemplate>
                         </MenuItem.ItemTemplate>
                     </MenuItem>
