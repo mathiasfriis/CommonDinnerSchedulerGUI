@@ -1,10 +1,12 @@
 ﻿using CommonDinnerSchedulerGUI.Business_Logic;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CommonDinnerScheduler
 {
@@ -150,10 +152,25 @@ namespace CommonDinnerScheduler
             //If they do, return true.
             foreach (CommonDinnerDate Date in allSpecificDates)
             {
-                if(allSpecificDates.Any(x => x.responsiblePerson==Date.responsiblePerson && x.date!=Date.date && (x.date-Date.date).TotalDays<14))
+                foreach(CommonDinnerDate x in allSpecificDates)
                 {
+                    if(Date.dateString!=x.dateString)
+                    {
+                        if((Date.responsiblePerson==x.responsiblePerson) && (getDifferenceInWeeks(Date.date,x.date)<2))
+                        {
+                            //MessageBox.Show("Clashing dates: " + Date.dateString + " and " + x.dateString);
+                            return true;
+                        }
+                    }
+                }
+                /*
+                if (allSpecificDates.Any(x => ((x.responsiblePerson == Date.responsiblePerson) && (x.date != Date.date) && (getDifferenceInWeeks(x.date, Date.date) < 2))))
+                {
+                    CommonDinnerDate clashDate = allSpecificDates.First(x => (x.responsiblePerson == Date.responsiblePerson && x.date != Date.date && (getDifferenceInWeeks(x.date, Date.date) < 2)));
+                    MessageBox.Show("Clashing dates: " + Date.dateString + " and " + clashDate.dateString);
                     return true;
                 }
+                */
             }
 
             return false;
@@ -207,6 +224,32 @@ namespace CommonDinnerScheduler
             float min = nDaysChefPrSignedUpDate.Values.Min();
             float dif = max - min;
             return dif;
+        }
+
+
+        public static int GetWeekOfMonth(DateTime date)
+        {
+            DateTime beginningOfMonth = new DateTime(date.Year, date.Month, 1);
+
+            while (date.Date.AddDays(1).DayOfWeek != CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek)
+                date = date.AddDays(1);
+
+            return (int)Math.Truncate((double)date.Subtract(beginningOfMonth).TotalDays / 7f) + 1;
+        }
+
+        public static int getDifferenceInWeeks(DateTime d1, DateTime d2)
+        {
+            int w1 = GetWeekOfMonth(d1);
+            int w2 = GetWeekOfMonth(d2);
+
+            int d = w2-w1;
+
+            if(d<0)
+            {
+                d = 52 + d;
+            }
+
+            return d;
         }
     }
 }

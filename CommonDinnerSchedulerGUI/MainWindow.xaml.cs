@@ -65,6 +65,7 @@ namespace CommonDinnerSchedulerGUI
                 }
                 else
                 {
+                    schedule.nDaysSignedUpFor[name] = 0;
                     schedule.participants.Add(name);
                 }
             }
@@ -129,10 +130,28 @@ namespace CommonDinnerSchedulerGUI
             schedule.AssignDates();
             int cnt = 0;
             float maxDiff = 0.5f;
-            while(schedule.getMaxRatioDifference()> maxDiff)
+            //while(schedule.getMaxRatioDifference()> maxDiff || schedule.checkIfAnyoneCooks2WeeksAfterAnother()==true)
+            bool secureNoCookInConsecutiveWeeks = true;
+            while ((schedule.checkIfAnyoneCooks2WeeksAfterAnother() == true) && (secureNoCookInConsecutiveWeeks))
             {
                 schedule.AssignDates();
                 if(cnt++==100)
+                {
+                    cnt = 0;
+                    maxDiff += 0.1f;
+                    if(maxDiff>1.5)
+                    {
+                        MessageBox.Show("Cannot guarantee that people will not cook 2 weeks in a row.");
+                        secureNoCookInConsecutiveWeeks = false;
+                    }
+                }
+            }
+
+            maxDiff = 0.5f;
+            while(schedule.getMaxRatioDifference()> maxDiff)
+            {
+                schedule.AssignDates();
+                if (cnt++ == 100)
                 {
                     cnt = 0;
                     maxDiff += 0.1f;
