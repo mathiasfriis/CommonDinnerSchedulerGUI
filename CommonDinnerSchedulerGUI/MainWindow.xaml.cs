@@ -89,15 +89,13 @@ namespace CommonDinnerSchedulerGUI
 
         private void TextBlock_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            /*
+            
             try
             {
                 string dayString = (sender as TextBlock).Text;
                 string nameString = LV_participants.SelectedItem.ToString();
 
                 DinnerDay dd = schedule.dinnerDays.First(x => x.dayOfWeekString.Equals(dayString));
-
-                MessageBox.Show("Signing " + nameString + " up for " + dd.dayOfWeekString);
                 
                 if(schedule.signPersonUpForDay(nameString,dd)==true) //Return value indicates whether the person was on the list already
                 {
@@ -110,9 +108,6 @@ namespace CommonDinnerSchedulerGUI
             {
                 MessageBox.Show("Please add participants to list before signing anyone up.");
             }
-            */
-
-            
         }
 
         private void cmSignOffSpecificWeekday_Click(object sender, RoutedEventArgs e)
@@ -193,6 +188,7 @@ namespace CommonDinnerSchedulerGUI
                 string nameString = LV_participants.SelectedItem.ToString();
 
                 DinnerDay dd = (DinnerDay)(sender as MenuItem).Items.CurrentItem;
+                
 
                 MessageBox.Show("Signing " + nameString + " up for " + dd.dayOfWeekString);
 

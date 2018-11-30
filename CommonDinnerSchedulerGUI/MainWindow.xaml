@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CommonDinnerSchedulerGUI"
+        xmlns:logic="namespace:CommonDinnerScheduler"
         mc:Ignorable="d"
         Title="Common Dinner Scheduler" Height="300" Width="650" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
@@ -11,6 +12,10 @@
     <Window.Resources>
         <RoutedUICommand x:Key="addResidentCommand" Text="Text" />
         <RoutedUICommand x:Key="addWeekdayCommand" Text="Another Text" />
+
+        <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
+            <StackPanel Margin="-20,0,0,0" Background="White"/>
+        </ItemsPanelTemplate>
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -58,9 +63,14 @@
             </ListView.View>
             <ListView.ContextMenu>
                 <ContextMenu Name="cmSignUpWeekdays">
-                    <MenuItem Name ="miSignUpFor" Header="Sign up for..." Click="miSignUpFor_Click">
-                        <MenuItem.ItemTemplate>
-                            <DataTemplate>
+                    <MenuItem Name ="miSignUpFor" Header="Sign up for...">
+                        <MenuItem.Resources>
+                            <Style TargetType="{x:Type MenuItem}">
+                                <Setter Property="ItemsPanel" Value="{StaticResource MenuItemPanelTemplate}"/>
+                            </Style>
+                        </MenuItem.Resources>
+                                <MenuItem.ItemTemplate>
+                                    <DataTemplate>
                                 <TextBlock Name="menuItem_tb_dayOfWeek" Text="{Binding Path=dayOfWeekString}" HorizontalAlignment="Stretch" MouseUp="TextBlock_MouseUp"/>
                             </DataTemplate>
                         </MenuItem.ItemTemplate>
